@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/:id', methods=['GET', 'PUT', 'DELETE'])
 def handle():
-    if request.method == 'POST':
+    if request.method == 'GET':
         pass
     if request.method == 'PUT':
         pass
