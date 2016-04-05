@@ -5,9 +5,17 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route("/")
-def hello():
-  return "Hello World!"
+@app.route('/:id', methods=['GET', 'PUT', 'DELETE'])
+def handle():
+    if request.method == 'POST':
+        pass
+    if request.method == 'PUT':
+        pass
+    if request.method == 'DELETE':
+        pass
+
+
+
 
 if __name__ == "__main__":
   app.run()
