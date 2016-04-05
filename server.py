@@ -9,7 +9,8 @@ def id_handler(id):
     if request.method == 'GET':
         return id
     if request.method == 'PUT':
-        pass
+        print request.form['payload']
+        return
     if request.method == 'DELETE':
         pass
 
@@ -18,7 +19,8 @@ def url_handler():
     if request.method == 'GET':
         pass
     if request.method == 'POST':
-        pass
+        return request.form['url']
+        return "200"
     if request.method == 'DELETE':
         pass
 
