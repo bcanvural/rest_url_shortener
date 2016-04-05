@@ -14,6 +14,14 @@ def handle():
     if request.method == 'DELETE':
         pass
 
+@app.route('/', methods=['GET', 'POST', 'DELETE'])
+def handle():
+    if request.method == 'GET':
+        pass
+    if request.method == 'POST':
+        pass
+    if request.method == 'DELETE':
+        pass
 
 
 
