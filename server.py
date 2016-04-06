@@ -1,7 +1,6 @@
 #!/bin/env python
 
-from flask import Flask
-from flask import request
+from flask import Flask, request, abort
 import re
 app = Flask(__name__)
 
@@ -36,10 +35,9 @@ def id_handler(id):
         if url:
             return redirect(url, code=301)
         else:
-            return "404"
-        return id
+            abort(404)
     if request.method == 'PUT':
-        url = validate_url(request.form['url'])
+        url = validate_url(str(request.form['url']))
         if url:
             newid = gen_new_id()
             dict[url] = newid
@@ -57,10 +55,10 @@ def url_handler():
     if request.method == 'GET':
         pass
     if request.method == 'POST':
-        url = validate_url(request.form['url'])
+        url = validate_url(str(request.form['url']))
         if url:
             if url in dict.keys():
-                return dict[url], 201
+                return dict[url], 201 #This does not work
             else:
                 newid = gen_new_id()
                 dict[url] = newid
