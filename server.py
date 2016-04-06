@@ -1,6 +1,6 @@
 #!/bin/env python
 
-from flask import Flask, request, abort
+from flask import Flask, request, abort, make_response
 import re
 app = Flask(__name__)
 
@@ -58,11 +58,11 @@ def url_handler():
         url = validate_url(str(request.form['url']))
         if url:
             if url in dict.keys():
-                return dict[url], 201 #This does not work
+                return make_response(str(dict[url]), 201) #This does not work
             else:
                 newid = gen_new_id()
                 dict[url] = newid
-                return dict[url], 201
+                return make_response(str(dict[url]), 201)
         else:
             abort(400)
     if request.method == 'DELETE':
