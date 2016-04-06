@@ -58,7 +58,7 @@ def url_handler():
         url = validate_url(str(request.form['url']))
         if url:
             if url in dict.keys():
-                return make_response(str(dict[url]), 201) #This does not work
+                return make_response(str(dict[url]), 201)
             else:
                 newid = gen_new_id()
                 dict[url] = newid
