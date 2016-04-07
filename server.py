@@ -9,7 +9,7 @@ dict = {}  # carrying url id pairs
 
 def get_key(value):
     for key in dict.keys():
-        if dict[key] == value:
+        if str(dict[key]) == value:
             return key
         else:
             return False
@@ -27,9 +27,13 @@ def validate_url(url):
     else:
         return False
 
+def check_id(id):
+    return int(id) in dict.values()
+
 
 @app.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
 def id_handler(id):
+    id = str(id) # get rid of the 'u' problem
     if request.method == 'GET':
         url = get_key(id)
         if url:
@@ -37,13 +41,14 @@ def id_handler(id):
         else:
             abort(404)
     if request.method == 'PUT':
-        url = validate_url(str(request.form['url']))
+        url = check_id(id) and validate_url(str(request.form['url']))
         if url:
-            newid = gen_new_id()
-            dict[url] = newid
-            return
+            del dict[get_key(id)] # delete old entry
+            dict[url] = id #update dict with new url, keep old id
+            return make_response('', 200)
         else:
             # There is no url in the request
+            # Or id is non-existent
             abort(400)
 
     if request.method == 'DELETE':
