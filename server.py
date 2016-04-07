@@ -47,7 +47,12 @@ def id_handler(id):
             abort(400)
 
     if request.method == 'DELETE':
-        pass
+        for key, item in dict.items():
+            if str(item) == id:
+                del dict[key]
+                return ('', 204)
+        #item never existed in the first place
+        abort(404)
 
 
 @app.route('/', methods=['GET', 'POST', 'DELETE'])
