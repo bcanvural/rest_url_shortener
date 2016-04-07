@@ -1,6 +1,6 @@
 #!/bin/env python
 
-from flask import Flask, request, abort, make_response
+from flask import Flask, request, abort, make_response, jsonify
 import re
 app = Flask(__name__)
 
@@ -53,7 +53,7 @@ def id_handler(id):
 @app.route('/', methods=['GET', 'POST', 'DELETE'])
 def url_handler():
     if request.method == 'GET':
-        pass
+        return make_response(jsonify(keys=dict.keys()), 200)
     if request.method == 'POST':
         url = validate_url(str(request.form['url']))
         if url:
@@ -66,7 +66,8 @@ def url_handler():
         else:
             abort(400)
     if request.method == 'DELETE':
-        pass
+        dict.clear()
+        return ('', 204)
 
 if __name__ == "__main__":
     app.run()
