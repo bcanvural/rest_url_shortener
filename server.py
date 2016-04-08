@@ -4,6 +4,9 @@ from flask import Flask, request, abort, make_response, jsonify, redirect
 import re
 app = Flask(__name__)
 
+HOST = "127.0.0.1"
+PORT = 5000
+
 dict = {}  # carrying url id pairs
 global id_counter
 id_counter = 0
@@ -100,4 +103,4 @@ def url_handler():
         return ('', 204)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host=HOST, port=PORT)
