@@ -27,7 +27,7 @@ def gen_new_id():
         id_counter += 1
         return newid
     else:
-        return 10
+        return None
 
 
 def validate_url(url):
@@ -93,8 +93,11 @@ def url_handler():
 
             else:
                 newid = gen_new_id()
-                dict[url] = str(newid)
-                return make_response(str(dict[url]), 201)
+                if newid != None:
+                    dict[url] = str(newid)
+                    return make_response(str(dict[url]), 201)
+                else:
+                   abort(500)
         else:
             return ('', 400)
 
